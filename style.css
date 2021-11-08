@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color:#264653;
+    color: #e9c46a;
+    font-family: 'jost';
+}
+
+.container{
+    width: 80%;
+    margin:auto;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.books{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.card{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    justify-content: space-between;
+    margin: 10px;
+    background-color:#586266;
+    padding: 30px;
+    border-radius: 15px;
+}
+.form{
+    margin:25px auto;
+    width: 30%;
+}
+
+.readSatus{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-self: flex-end;
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    margin: 5px;
+    font-size: 32px;
+}
+#read{
+    width: 60px;
+    height: 40px;
+    margin-right: 0;
+    justify-self: flex-end;
+}
+label{
+    font-size: 32px;
+    margin-right: 15px;
+}
+
+.markRead{
+    height: 30px;
+    width:70px;
+    background-color:#2a9d8f;
+    border: none;
+    border-radius: 25px;
+}
+
+.notRead{
+    height: 30px;
+    width:70px;
+    background-color:#e76f51;
+    border: none;
+    border-radius: 25px;
+}
+
+.card span{
+    margin-bottom:-130px;
+}
+
+.card h2{
+    flex-basis: 20%;
+}
+
+.card h3{
+    margin-top: -90px;
+}

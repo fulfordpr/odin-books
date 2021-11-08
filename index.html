@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Digital Library</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <form class="form">
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <input type="text" name="author" id="author" placeholder="author" required>
+            <input type="number" name="pages" id="pages" placeholder="pages">
+            <section class="readStatus">
+                <label for="read">I've read the book</label>
+                <select type="select" name="readStatus" id="read" placeholder="Yes">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </section>
+            <!-- <input type="file" name="cover" id="cover"> -->
+            <button class="submit" type="button">Add Book!</button>
+        </form>
+        <div class="books">
+
+        </div>
+    </div>
+
+
+
+    <script src="/app.js"></script>
 </body>
 </html>
