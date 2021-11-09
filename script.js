@@ -29,7 +29,7 @@ const addNewBook = () =>{
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
     if (title === '' || author === '' || pages === ''){
-        alert('Title, Author, and PAge number are Required.')
+        alert('Title, Author, and Page number are Required.')
         return;
     }
     for (let i = 0; i < library.length; i ++){
