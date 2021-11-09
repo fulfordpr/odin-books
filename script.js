@@ -158,6 +158,7 @@ for (i of notRead){
         thisTitle = this.parentElement.parentElement.firstChild.textContent
         console.log(thisTitle)
         changeReadStatus(thisTitle);
+        pullLibrary();
     })
 }
 
