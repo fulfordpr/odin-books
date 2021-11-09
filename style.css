@@ -152,10 +152,21 @@ button:active{
 
 
 
-@media (max-width: 800px) {
+@media (max-width: 865px) {
     .form{
         margin:25px auto;
         width: 100%;
     }
+
+    .books{
+        justify-content: center;
+        width: 100%;
+    }
+
+    .card{
+        width:290px;
+        margin: auto;
+    }
   }
+
 
