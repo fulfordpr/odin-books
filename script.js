@@ -12,6 +12,7 @@ const submit = document.querySelector('.submit');
 let library = JSON.parse(localStorage.getItem('library'));
 let bookshelf = document.querySelector('.books');
 let totalPagesRead = 0;
+let notRead = document.querySelectorAll('.notRead');
 
 
 //Book Constructor
@@ -112,7 +113,20 @@ const pullLibrary = () => {
         })
         buttons.appendChild(removeBook); 
     }
+    //setting and looping through all the unread buttons and changing their classes/changing the read status
+    notRead = document.querySelectorAll('.notRead');
+    for (i of notRead){
+        i.addEventListener('click', function(){
+            console.log(this);
+            this.classList.remove('notRead');
+            this.classList.add('markRead');
+            this.textContent = 'Read';
+            thisTitle = this.parentElement.parentElement.firstChild.textContent
+            console.log(thisTitle)
+            changeReadStatus(thisTitle);
 
+        })
+    }
 }
 
 //deletes selected book from local storage {title} comes from the text content of the h2 tag in the card
@@ -148,20 +162,7 @@ const changeReadStatus = function(title){
 window.onload = pullLibrary();
 
 
-//setting and looping through all the unread buttons and changing their classes/changing the read status
-const notRead = document.querySelectorAll('.notRead');
-for (i of notRead){
-    i.addEventListener('click', function(){
-        console.log(this);
-        this.classList.remove('notRead');
-        this.classList.add('markRead');
-        this.textContent = 'Read';
-        thisTitle = this.parentElement.parentElement.firstChild.textContent
-        console.log(thisTitle)
-        changeReadStatus(thisTitle);
-        pullLibrary();
-    })
-}
+
 
 //button to add new books
 submit.addEventListener('click', ()=> {
