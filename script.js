@@ -13,6 +13,7 @@ let library = JSON.parse(localStorage.getItem('library'));
 let bookshelf = document.querySelector('.books');
 let totalPagesRead = 0;
 let notRead = document.querySelectorAll('.notRead');
+let totalPageCount = document.querySelector('.totalPages');
 
 
 //Book Constructor
@@ -91,7 +92,6 @@ const pullLibrary = () => {
             readStatus.classList.add('markRead')
             //add the number of pages of the read book to the toal
             totalPagesRead += Number(library[i].pages)
-            document.querySelector('.totalPages').textContent = `${totalPagesRead} Pages Read`
         } else {
             readStatus.textContent = 'Unread'
             readStatus.classList.add('notRead')
@@ -117,16 +117,18 @@ const pullLibrary = () => {
     notRead = document.querySelectorAll('.notRead');
     for (i of notRead){
         i.addEventListener('click', function(){
-            console.log(this);
             this.classList.remove('notRead');
             this.classList.add('markRead');
             this.textContent = 'Read';
             thisTitle = this.parentElement.parentElement.firstChild.textContent
-            console.log(thisTitle)
+            thisPages = Number(this.parentElement.parentElement.children[2].textContent);
+            console.log(thisPages);
             changeReadStatus(thisTitle);
-
+            totalPagesRead += thisPages;
+            totalPageCount.textContent = `${totalPagesRead} Pages Read`
         })
     }
+    totalPageCount.textContent = `${totalPagesRead} Pages Read`
 }
 
 //deletes selected book from local storage {title} comes from the text content of the h2 tag in the card
