@@ -127,6 +127,7 @@ const deleteFromLibrary = function(title){
             localStorage.setItem('library', JSON.stringify(library))
         }
     }
+    pullLibrary();
 }
 
 //change the status of a book from unread to read.
