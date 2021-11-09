@@ -1,9 +1,18 @@
+//Check if a library array exists. if not, make one. 
+function initLibrary(){
+    if (localStorage.library === undefined){
+        localStorage.setItem('library', '[]');
+    }
+}
+
+window.onload = initLibrary()
+
 //DOM elements
 const submit = document.querySelector('.submit');
 let library = JSON.parse(localStorage.getItem('library'));
 let bookshelf = document.querySelector('.books');
 let totalPagesRead = 0;
-const deleteBook = document.getElementsByClassName('delete');
+
 
 //Book Constructor
 const Book = function(title, author, pages, read){
@@ -19,6 +28,17 @@ const addNewBook = () =>{
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
+    if (title === '' || author === '' || pages === ''){
+        alert('Title, Author, and PAge number are Required.')
+        return;
+    }
+    for (let i = 0; i < library.length; i ++){
+        if (title === library[i].title){
+            alert(`You already have ${title} in your library.`)
+            form.reset();
+            return;
+        }
+    }
     let read = document.getElementById('read').value;
     //check the read status and set to t/f
     if (read === 'true'){
@@ -36,15 +56,11 @@ const addNewBook = () =>{
     form.reset();
 }
 
-//Check if a library array exists. if not, make one. 
-const initLibrary = function(){
-    if (localStorage.library === undefined){
-        localStorage.setItem('library', '[]');
-    }
-}
+
 
 const pullLibrary = () => {
     bookshelf.innerHTML = '';
+    totalPagesRead = 0;
     for (i = 0; i < library.length; i++){
         let card = document.createElement('div');
         card.classList.add('card')
@@ -74,6 +90,7 @@ const pullLibrary = () => {
             readStatus.classList.add('markRead')
             //add the number of pages of the read book to the toal
             totalPagesRead += Number(library[i].pages)
+            document.querySelector('.totalPages').textContent = `${totalPagesRead} Pages Read`
         } else {
             readStatus.textContent = 'Unread'
             readStatus.classList.add('notRead')
@@ -84,24 +101,71 @@ const pullLibrary = () => {
             removeBook.classList.add('delete')
             removeBook.textContent = 'X Delete';
         
-        //find a way to delete books
-        removeBook.addEventListener('click', (e) =>{
-            console.log(EventTarget)
+        //Mke each 'delete' button delete books
+        removeBook.addEventListener('click', () =>{
+            //Remove the card from the UI
+            removeBook.parentElement.parentElement.outerHTML = '';
+            //find the book title in the card
+            thisTitle = removeBook.parentElement.parentElement.firstChild.textContent
+            //remove from local storage
+            deleteFromLibrary(thisTitle);
         })
         buttons.appendChild(removeBook); 
     }
 
 }
 
-window.onload = initLibrary;
-window.onload = pullLibrary;
+//deletes selected book from local storage {title} comes from the text content of the h2 tag in the card
+const deleteFromLibrary = function(title){
+    //loop through local storage
+    for (let i = 0; i < library.length; i ++){
+        //check to see if the chosen card title matches the current index title
+        if (library[i].title === title){
+            //if a match is found, remove it from the array
+            library.splice(i, 1);
+            //replacing the library object with the updated library
+            localStorage.setItem('library', JSON.stringify(library))
+        }
+    }
+}
 
+//change the status of a book from unread to read.
+const changeReadStatus = function(title){
+    //loop through local storage
+    for (let i = 0; i < library.length; i ++){
+        //check to see if the chosen card title matches the current index title
+        if (library[i].title === title){
+            //if a match is found, set read to true
+            library[i].read = true;
+            //replacing the library object with the updated library
+            localStorage.setItem('library', JSON.stringify(library))
+        }
+    }
+}
+
+
+window.onload = pullLibrary();
+
+
+//setting and looping through all the unread buttons and changing their classes/changing the read status
+const notRead = document.querySelectorAll('.notRead');
+for (i of notRead){
+    i.addEventListener('click', function(){
+        console.log(this);
+        this.classList.remove('notRead');
+        this.classList.add('markRead');
+        this.textContent = 'Read';
+        thisTitle = this.parentElement.parentElement.firstChild.textContent
+        console.log(thisTitle)
+        changeReadStatus(thisTitle);
+    })
+}
+
+//button to add new books
 submit.addEventListener('click', ()=> {
     addNewBook();
+    pullLibrary();
 });
-
-
-
 
 
 
