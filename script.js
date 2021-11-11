@@ -41,6 +41,11 @@ const addNewBook = () =>{
             return;
         }
     }
+
+    if(pages < 1){
+        alert('Please enter a positive nuber of pages. . .');
+        return;
+    }
     let read = document.getElementById('read').value;
     //check the read status and set to t/f
     if (read === 'true'){
@@ -116,7 +121,7 @@ const pullLibrary = () => {
     //setting and looping through all the unread buttons and changing their classes/changing the read status
     notRead = document.querySelectorAll('.notRead');
     for (i of notRead){
-        i.addEventListener('click', function(){
+            i.addEventListener('click', function(){
             this.classList.remove('notRead');
             this.classList.add('markRead');
             this.textContent = 'Read';
@@ -126,6 +131,7 @@ const pullLibrary = () => {
             changeReadStatus(thisTitle);
             totalPagesRead += thisPages;
             totalPageCount.textContent = `${totalPagesRead} Pages Read`
+            window.location.reload();
         })
     }
     totalPageCount.textContent = `${totalPagesRead} Pages Read`
